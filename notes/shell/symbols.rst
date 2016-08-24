@@ -89,7 +89,7 @@ $ - Environment Variables
   the append.
 
 
- | - Pipe
+\| - Pipe
 ---------
 
 * You can take the output of one command and run it as input through
