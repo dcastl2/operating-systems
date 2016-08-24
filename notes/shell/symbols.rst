@@ -89,8 +89,8 @@ $ - Environment Variables
   the append.
 
 
-| - Pipe
---------
+ | - Pipe
+---------
 
 * You can take the output of one command and run it as input through
   another command using the pipe (``|``) symbol.  Example:
@@ -129,7 +129,7 @@ $ - Environment Variables
 ` - Execute Result
 ------------------
 
-* When a command is surrounded in backticks (``\```), it is executed,
+* When a command is surrounded in backticks (`), it is executed,
   then the result is used in the encompassing command.  For example:
 
   .. code:: sh
@@ -144,8 +144,8 @@ $ - Environment Variables
   which is then stored in the environment variable ``res``.
 
 
-\ - Line Continuation
----------------------
+\\ - Line Continuation
+----------------------
 
 * You can split long commands among several lines. This can be useful
   for commands which contain several pipes.  For example:

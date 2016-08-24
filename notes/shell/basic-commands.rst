@@ -19,6 +19,7 @@ Commands for Navigation
     three letters gives permissions for the user, the second set is for the
     group, and the third is for all others.
 
+    ::
       total 36
       -rw-r--r-- 1 mouse mouse 4685 Aug 24 16:51 calendar.rst
       -rw-r--r-- 1 mouse mouse 3310 Aug 24 13:57 commands.rst
