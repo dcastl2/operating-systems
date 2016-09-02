@@ -69,10 +69,10 @@ if you submit the assignment N<=8 days in advance of the due date.
      ``ch1-notes.rst``.
 
      a. A comprehensive study guide.
-        [16] For an additional 16 points, you may do the same for Chapter 2
-        (Operating System Structures) according to the same specifications as
-        the above problem; but only if you have done a study guide for Chapter
-        1.  Call this ``ch2-notes.rst``.
+          [16] For an additional 16 points, you may do the same for Chapter 2
+          (Operating System Structures) according to the same specifications
+          as the above problem; but only if you have done a study guide for
+          Chapter 1.  Call this ``ch2-notes.rst``.
 
 
 5. Overview questions.
@@ -81,11 +81,11 @@ if you submit the assignment N<=8 days in advance of the due date.
      Call this ``ch1-questions.rst``.
 
      a. Operating Systems Structures questions.
-        [16]  For an additional 16 points, you may do the same for Chapter
-        2; but only if you have answered the Chapter 1 questions.  Answer
-        questions 2.1-2.24 [12=24x1/2]. In addition, answer 2.25; give a
-        thorough discussion [3].  Use ReStructured Text to format your
-        answers [1].  Call this ``ch2-questions.rst``.
+          [16]  For an additional 16 points, you may do the same for Chapter
+          2; but only if you have answered the Chapter 1 questions.  Answer
+          questions 2.1-2.24 [12=24x1/2]. In addition, answer 2.25; give a
+          thorough discussion [3].  Use ReStructured Text to format your
+          answers [1].  Call this ``ch2-questions.rst``.
 
 6. **Bonus points**: do everything.
      [+8] If you do all of the above to 100% completion, then you will get a
