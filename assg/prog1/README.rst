@@ -26,7 +26,7 @@ if you submit the assignment N<=8 days in advance of the due date.
      the following: syntax-highlight the code [2], compile the code [2], then
      on the condition the code compiled successfully, run it [2].  Assume the
      source is such that the compilation and running process is simple (e.g.
-     ``javac Hello.java; java Hello`` or ``gcc hello.cpp -o hello; ./hello``).
+     ``javac Hello.java; java Hello`` or ``gcc hello.c -o hello; ./hello``).
      Document each step of the script with the ``smartlog`` logging functions
      [4], and in particular print failure messages on file-not-found,
      compilation, and run errors, or if the extension does not match [4].  Call
