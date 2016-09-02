@@ -5,9 +5,9 @@ Select up to 64 points worth of problems.  You may earn +N extra credit points
 if you submit the assignment N<=8 days in advance of the due date.
 
 1. A script for reviewing notes and codes.
-     [16] As you know, the ``README.rst`` in each directory in notes/ has an
-     ordered list of files you should read. It would be useful to automate that
-     process.
+     [16] As the course unfolds, the ``README.rst`` in each directory in notes/
+     will have an ordered list of files you should read (see the example in
+     shell/). It would be useful to automate the process of reviewing them.
      
      Write a script which can, for all the codes mentioned in ``README.rst``
      (in the order they are mentioned) do the following: syntax-highlight [2]
