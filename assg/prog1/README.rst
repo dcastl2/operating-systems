@@ -32,6 +32,9 @@ if you submit the assignment N<=8 days in advance of the due date.
      compilation, and run errors, or if the extension does not match [4].  Call
      this ``examine.sh``.  As long as you meet the specifications, you are free
      to personalize your script.
+     
+     See ``src/`` for an example of a script that uses the ``smartlog``
+     library.
 
 3. A POSIX-compliant file copy.
      [16] Write a POSIX-compilant version of the ``cp`` command using C library

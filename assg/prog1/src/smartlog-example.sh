@@ -18,6 +18,4 @@ fail
 
 warn "I'm about to stop"
 
-
-alert "I'm stopping now"
-echo
+die "I'm stopping now"
