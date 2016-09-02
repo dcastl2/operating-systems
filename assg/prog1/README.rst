@@ -60,7 +60,7 @@ if you submit the assignment N<=8 days in advance of the due date.
      memory while I watch, and demonstrate its use, I will give you a fox
      sticker (+1).
 
-4. A study guide.
+5. A study guide.
      [16] For every section and subsection of Chapters 1, write detailed notes
      on the section, summarizing its key points.  Break down the subsections to
      key concepts (terms, facts, examples); be as concise, but comprehensive as
@@ -75,7 +75,7 @@ if you submit the assignment N<=8 days in advance of the due date.
           Chapter 1.  Call this ``ch2-notes.rst``.
 
 
-5. Overview questions.
+6. Overview questions.
      [16]  Answer **all** of the questions at the end of Chapter 1 (there are
      30 total) [15=30x1/2]. Use ReStructured Text to format your answers [1].
      Call this ``ch1-questions.rst``.
@@ -87,7 +87,7 @@ if you submit the assignment N<=8 days in advance of the due date.
           thorough discussion [3].  Use ReStructured Text to format your
           answers [1].  Call this ``ch2-questions.rst``.
 
-6. **Bonus points**: do everything.
+7. **Bonus points**: do everything.
      [+8] If you do all of the above to 100% completion, then you will get a
      feeling for what it is like to be me. It may provide perspective for those
      of you who are considering a career in academia.
