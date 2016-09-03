@@ -10,7 +10,8 @@ if you submit the assignment N<=8 days in advance of the due date.
      shell/). It would be useful to automate the process of reviewing them.
      
      Write a script which can, for all the codes mentioned in ``README.rst``
-     (in the order they are mentioned) do the following: syntax-highlight [2]
+     (in the order they are mentioned) do the following: print the code
+     syntax-highlighted to stdout (see the manual page for ``highlight``) [2]
      and number-line [2] the code/note, wait for the user to hit Enter [2],
      then clear the screen [2].  The directory to use shall be taken in as a
      command-line argument (thus, the script should be runnable outside of the
