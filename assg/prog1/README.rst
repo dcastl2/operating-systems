@@ -11,15 +11,16 @@ if you submit the assignment N<=8 days in advance of the due date.
      
      Write a script which can, for all the codes mentioned in ``README.rst``
      (in the order they are mentioned) do the following: print the code
-     syntax-highlighted to stdout (see the manual page for ``highlight``) [2]
-     and number-line [2] the code/note, wait for the user to hit Enter [2],
-     then clear the screen [2].  The directory to use shall be taken in as a
+     syntax-highlighted to stdout (see the manual page for ``highlight``), [2]
+     number-line [2] the code/note, wait for the user to hit Enter [2], then
+     clear the screen [2].  The directory to use shall be taken in as a
      command-line argument (thus, the script should be runnable outside of the
      current directory) [2]; if no argument is given, it should act on the
-     current directory if a README.rst exists [2].  Use the commands ``file``,
-     ``highlight``, ``nl``, ``read``, and ``clear``.  Document the script [4].
-     Call this ``review.sh``.  As long as you meet the specifications, you are
-     free to personalize your script however you like.
+     current directory if a README.rst exists in the current directory [2].
+     Use the commands ``file``, ``highlight``, ``nl``, ``read``, and ``clear``.
+     Document the script with comments [4].  Call this ``review.sh``.  As long
+     as you meet the specifications, you are free to personalize your script
+     however you like.
 
 2. A script for compiling and running code.
      [16] Write a script utilizing the ``smartlog`` library which should accept
