@@ -75,6 +75,12 @@ Exeuction and Checking
     detailing what is being executed, and the second is the command. Both
     arguments should be in double-quotes.
 
+    + It is important to note that by default, in the event of an execution
+      failure, the script will stop. One may use ``set +e`` to disable this
+      behavior.
+
+  * ``s_ex`` will do the same as ``s_exn`` but will background the process.
+
 
 Behavior
 --------
