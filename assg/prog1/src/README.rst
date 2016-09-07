@@ -13,7 +13,7 @@ so that a user would know exactly where the script failed.  Its core functions:
   + ``ok`` which indicates successful execution and prints an [  OK  ] tag
 
   + ``fail`` which indicates unsuccessful execution and prints a [ FAIL ]
-  tag 
+    tag 
 
 * ``tip`` puts a blue asterisk behind the message and terminates its string
   argument with an period (.) then automatically prints an [ INFO ] tag in
