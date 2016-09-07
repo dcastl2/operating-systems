@@ -9,7 +9,7 @@ Its intended use was to document scripts both internally and during run-time,
 so that a user would know exactly where the script failed.  Its core functions:
 
 
-Basic logging functionality
+Basic Logging Functionality
 ---------------------------
 
   * ``log`` puts a green asterisk behind the message and terminates its string
@@ -37,7 +37,7 @@ Basic logging functionality
     red. It terminates the script.
 
 
-Interactive input
+Interactive Input
 -----------------
 
   * ``prompt`` prompts for input, which is then stored in an environment
@@ -79,14 +79,17 @@ Exeuction and Checking
 Behavior
 --------
 
-* The ``TYPEOUT`` environment variable may be set to ``true`` to cause any
-  of the messages to be "typed out", as if by a human; then ``false`` to
-  disable this behavior. You can also typeout text with the ``typeout``
-  function regardless of whether or not the variable is set.
+  * The ``TYPEOUT`` environment variable may be set to ``true`` to cause any
+    of the messages to be "typed out", as if by a human; then ``false`` to
+    disable this behavior. You can also typeout text with the ``typeout``
+    function regardless of whether or not the variable is set.
 
-* The ``QUIET`` environment variable may be set to ``true`` to cause any
-  of the messages to be silent, then set to ``false`` to disable.
+  * The ``QUIET`` environment variable may be set to ``true`` to cause any
+    of the messages to be silent, then set to ``false`` to disable.
 
+
+How to Use
+----------
 
 Note that you must include it using the line
 
@@ -96,11 +99,19 @@ Note that you must include it using the line
 
 which is used to include its source.
 
+
+Post-Execution Logs
+-------------------
+
 The messages from ``smartlog`` are automatically dumped into .output.log and
 .error.log files (hidden in the current directory), in addition to being shown
 on stdout.  To view those files, use the ``cat`` command on them; they won't
 render correctly in a software like ``vim`` since they contain ANSI color
 change escape sequences.
+
+
+Installing SmartLog on Your System
+----------------------------------
 
 If you want for ``smartlog`` to work on your system, then clone it from my
 GitHub page (http://github.com/dcastl2/smartlog) and run ``install.sh`` as a
