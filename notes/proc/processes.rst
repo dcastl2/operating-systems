@@ -240,3 +240,137 @@ Interprocess Communication
     + the convenience of time-sharing
 
   * Two main IPC mechanisms are **shared memory** and **message passing**.
+
+  * There are also **sockets** and **pipes**.
+
+
+Shared-Memory Systems
+---------------------
+
+  * A producer process creates a message or some form of data or information
+    which it writes to a shared memory object.
+
+  * A consumer process reads the data from the shared memory object.
+
+  * Both the consumer and producer use a name on the memory segment which they
+    each may use to refer to it.
+
+  * Buffers can unbounded or bounded (size limit).
+
+  * In POSIX (portable operating system interface) systems, shared memory can
+    be opened using the ``shm_open`` system call.
+
+
+Message-Passing Systems
+-----------------------
+
+  * Message passing involves sending information to a receiver. Refers to the
+    logical implementation.  Physically it may be enabled via shared memory,
+    hardware bus, or network. 
+
+
+Naming
+~~~~~~
+
+  * Typically ``send`` and ``recv`` primitives are defined for messages. May
+    use direct communication by referring to other processes by names.  P
+    may send a message to Q, for example (symmetric; both processes must
+    know each others' names).
+
+  * Message-passing can be asymmetric, so that a process is allowed to receive
+    messages from any other process.
+
+  * Indirect communication is possible by sending messages to ``mailboxes``
+    or ``ports`` which reside in memory.  Owners receive messages, users send.
+
+  * Suppose P1 sends message to mailbox M, then P2 and P3 call a ``recv`` from
+    M. Which one receives? Answer depends:
+
+      + Could allow only one link at a time
+      + Could allow only one ``recv`` call at a time
+      + Could handle the message using an algorithm, such as **round robin**
+
+  * Mailboxes can be owned by processes or by operating system. The operating
+    system has the responsibility of enabling processes to create/delete 
+    mailboxes and send/receive messages through them.
+
+
+Synchronization
+~~~~~~~~~~~~~~~
+
+  * Message passing can be **blocking** or **nonblocking**, also known as
+    synchronous or asynchronous.  Blocking means process waits, nonblocking means
+    process does not wait--instead it resumes immediately following the
+    operation.
+
+    + Blocking send means sender blocks until receiver receives.
+    + Blocking receive means receiver blocks until receiver receives.
+    + Nonblocking send means sender resumes after send.
+    + Nonblocking receive means receiver retrieves message or NULL.
+
+  * If both send and receive are blocking, there exists a **rendevous** between
+    sender and receiver. 
+
+Buffering
+~~~~~~~~~
+
+  * Messages echanged reside in a queue, which can be
+
+    + Zero capacity.  Means the sender must block.
+
+    + Bounded capacity.  Queue has finite length.  If the queue is full,
+      sender must block.
+
+    + Unbounded capacity. Queue is never full. Sender never blocks.
+
+  * The latter two are referred to as systems with automatic buffering.
+
+Examples
+========
+
+  * See codes.
+
+
+Client-Server Communication
+===========================
+
+  * A **socket** is a communication endpoint.  Think of an electric socket
+    as being the endpoint for an electrical connection.
+
+  * Socket is identified by an IP and a port. Ports below 1024 are well-known.
+
+  * 127.0.0.1 is referred to as **loopback**; this is the machine's own
+    address.
+
+  * TCP (transmission control protocol) sockets are connection-oriented. 
+    A connection exists between client/server and information is sent via
+    a stream. It is more complex and slower but more reliable.
+
+  * UDP (universal datagram protocol) sockets are connectionless. Information
+    is sent in packets. It is lighter and faster but less reliable.
+
+  * In POSIX, sockets can be created using the ``socket`` system call.
+
+  * In Linux, ``netcat`` can be used to make a client/server.
+
+
+Remote Procedure Calls
+----------------------
+
+Pipes
+-----
+
+  * A **pipe** is a conduit allowing two processes to communicate. In a pipe,
+    there is at least one write end and one read end.  It can be unidirectional
+    or bidirectional.
+
+  * Can also be half-duplex, which means data is allowed to travel one way at
+    a time, or full-duplex, which means it can travel both ways at the same time.
+
+  * Pipes can be used to communicate between parent-child processes and over
+    networks.
+
+  * In POSIX, pipes can be created using the ``pipe`` system call.
+
+  * In Linux, ``mkfifo`` can be used to make a pipe in the form of a file.
+

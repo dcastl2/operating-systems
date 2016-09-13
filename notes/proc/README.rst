@@ -1,9 +1,16 @@
 * ``processes.rst`` contains notes on processes.
 
-* ``fork.c`` has an example of a program which forks, creating a child process,
-  which runs until its parent calls wait.
+* ``fork.c`` has an example of a fork of a process.
 
-* ``server.c`` has an example of a server, made with sockets, which reports the
-  time to a client which makes a request to it.
+* ``shm-read.c`` shows a shared memory consumer.
 
-* ``client.c`` is the client which goes along with the server.
+* ``shm-write.c`` shows a shared memory producer.
+
+* ``client.c`` is a date/time client.
+
+* ``server.c`` is a date/time server.
+
+* ``pipe.c`` demonstrates how to create and use a pipe.
+
+* ``fork-sum.c`` reveals how forking and pipe IPC can be used to sum
+  numbers concurrently.
