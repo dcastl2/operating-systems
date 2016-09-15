@@ -76,8 +76,6 @@ int main() {
         // file descriptor.
         close(connfd);
 
-        // We repeat this process every second (thus polling for
-        // incoming messages).
         sleep(1);
 
     }
