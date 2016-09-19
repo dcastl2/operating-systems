@@ -34,11 +34,11 @@ if you submit the assignment N<=8 days in advance of the due date.
      48) / (1 x 2 x 3 x 4 x 5)``. 
       
      The program should accept m and n as command-line arguments. It should
-     then fork.  The parent should calculate *m!/(m-n)!*, which is a product of
-     *n* numbers.  The child should calculate *n!*.  A pipe will then be used
-     to transfer the result of *n!* to the parent, which will then complete the
-     calculation by dividing the two results, and output the final result to
-     stdout.  Call this ``choose.c``.
+     then fork.  The parent should calculate *m!/((m-n)!n!)*, which is a
+     product of *n* numbers.  The child should calculate *n!*.  A pipe will
+     then be used to transfer the result of *n!* to the parent, which will then
+     complete the calculation by dividing the two results, and output the final
+     result to stdout.  Call this ``choose.c``.
 
 
 4. Using shared memory to exchange secret messages among users.
