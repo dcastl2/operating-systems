@@ -58,9 +58,9 @@ if you submit the assignment N<=8 days in advance of the due date.
      only involves executables which self-replicate locally.
      
      Create a program which copies itself (the running executable) into another
-     file with a random name of 8-byte lowercase characters.  It should then
-     make a system call to ``chmod`` to modify the permissions of the copy so
-     as to make it executable.  Finally it should execute it using one of the
+     file with a random name of 8 lowercase characters.  It should then make a
+     system call to ``chmod`` to modify the permissions of the copy so as to
+     make it executable.  Finally it should execute it using one of the
      ``exec`` family of functions, thus propagating its replication. Name this
      ``kitties.c``. 
 
