@@ -1,17 +1,17 @@
+======================================
 Chapter 2: Operating System Structures
---------------------------------------
+======================================
 
 
 What OS Structures is About
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
  * *Operating system structures* refers to the anatomy of an operating system.
  What are the core parts and components that make everything work together?
 
 
-=========================
 Operating System Services
-=========================
+-------------------------
 
  * Operating systems are understood in terms of their functional components.
 
@@ -20,7 +20,7 @@ Operating System Services
 
 
 Helpful functions
-~~~~~~~~~~~~~~~~~
+-----------------
 
  * **user interface**
  * **program execution**
@@ -31,20 +31,20 @@ Helpful functions
 
 
 Efficiency functions
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
  * **resource allocation**
  * **accounting**
  * **protection and security**
 
 
-===================================
+-----------------------------------
 User and Operating-System Interface
-===================================
+-----------------------------------
 
 
 Interfaces
-~~~~~~~~~~
+..........
 
  * In order to be at all useful, an operating system needs to have an
  interface.
@@ -59,7 +59,7 @@ Command Interpreters
 
 
 Shells
-~~~~~~
+......
 
  * Command interpreters are what we have been looking at.  The user types in a
  command, which points to an executable somewhere on the system, and that
@@ -72,11 +72,8 @@ Shells
 
 
 Graphical User Interfaces
--------------------------
+.........................
 
-
-GUIs
-~~~~
 
  * Xerox Alto was the first (1973).
 
@@ -89,10 +86,6 @@ GUIs
 
  * Now phones have their own GUIs (2009).
 
-
-GUIs
-~~~~
-
  * In Linux terminology, there is a distinction between a *window manager*,
  such as fluxbox, openbox, etc. which does nothing but manage windows; a
  *desktop environment*, which is a full graphical environment with its own
@@ -103,7 +96,7 @@ GUIs
 
 
 Choice of Interface
--------------------
+...................
 
  * People who choose CLI may be system administrators, system programmers,
  computational scientists, or power users. Reasons to choose CLI:
@@ -119,11 +112,11 @@ Choice of Interface
 
 
 System Calls
-============
+------------
 
 
 What are System Calls?
-~~~~~~~~~~~~~~~~~~~~~~
+......................
 
  * System calls provide an interface to services made available by the
  operating system.
@@ -142,11 +135,7 @@ What are System Calls?
 
 
 Types of System Calls
-=====================
-
-
-Types of System Calls
-~~~~~~~~~~~~~~~~~~~~~
+.....................
 
   * process control
   * file management
@@ -157,7 +146,7 @@ Types of System Calls
 
 
 Process Control
----------------
+...............
 
   * These are responsible for creating, deleting, loading, and executing
   processes; or getting or setting process information; or waiting, allocating
@@ -175,7 +164,7 @@ Process Control
 
 
 File Management
----------------
+...............
 
   * These are responsible for creating, deleting, reading from, or writing to
   files/directories; or getting or setting file/directory information.
@@ -191,7 +180,7 @@ File Management
 
 
 Device Management
------------------
+.................
 
   * These are responsible for creating, deleting, reading from, or writing to
   devices; or getting or setting device information.
@@ -209,7 +198,7 @@ Device Management
 
 
 Information Maintenance
------------------------
+.......................
 
   * Get/set information.  Anything having to do with timers.  ``time()``, for
   example; also ``alarm()`` and ``sleep()``. 
@@ -221,7 +210,7 @@ Information Maintenance
 
 
 Communication
--------------
+.............
 
   * ``pipe()`` creates a pipe, a means of interprocess communication.
 
@@ -233,7 +222,7 @@ Communication
 
 
 Protection
-----------
+..........
 
   * ``chmod()`` changes file permissions, ``chown()`` file ownership.
 
@@ -242,7 +231,7 @@ Protection
 
 
 System Programs
-===============
+...............
 
   * System programs are implemented to handle the most important and frequent
   system calls, or to perform simple operations that require a few system
@@ -258,11 +247,11 @@ System Programs
 
 
 OS Designs and Implementation
-=============================
+-----------------------------
 
 
 Design Goals
-------------
+............
 
   * Relates back to perspectives on operating system: user and system.
 
@@ -302,11 +291,11 @@ Implementation
 
 
 OS System Structure
-===================
+-------------------
 
 
 Structures
-~~~~~~~~~~
+..........
 
  * monolithic
  * layered
@@ -314,7 +303,7 @@ Structures
 
 
 Monolithic
-----------
+..........
 
  * In a monolithic kernel, all functionality is built into a single entity.
 
@@ -325,7 +314,7 @@ Monolithic
 
 
 Layered Approach
-----------------
+................
 
  * In a layered approach, the functionality is built upon layers. The higher
  layers call lower layers, and so forth.
@@ -336,7 +325,7 @@ Layered Approach
 
 
 Microkernels
-------------
+............
 
  * A microkernel supports mainly IPC, and minimal memory and process
  management. All extensions are developed in user space.
@@ -350,7 +339,7 @@ Microkernels
 
 
 Modules
--------
+.......
 
  * Some kernels are modular. Linux, for example. Modules can be listed with
  ``lsmod``, inserted and removed with ``modprobe``. These modules are primarily
@@ -360,7 +349,7 @@ Modules
 
 
 Hybrid Systems
---------------
+..............
 
   * Mac OS X is a layered system with Aqua GUI, Cocoa for Objective-C, and has
   a Mach microkernel and BSD (Berkeley Software Distribution) Unix kernel.
@@ -373,7 +362,7 @@ Hybrid Systems
 
 
 OS Debugging
-============
+------------
 
   * Kernel supports printing of various messages; in Linux these are accessed
   via the ``dmesg`` command. 
@@ -382,7 +371,7 @@ OS Debugging
 
 
 OS Generation
-=============
+-------------
 
   * Refers to generation of an operating system at a particular hardware site.
   OS generation is part of the installation process.
@@ -399,7 +388,7 @@ OS Generation
 
 
 OS Boot
-=======
+-------
 
   * Power button triggers execution of the bootstrap program in firmware (which
   is some form of ROM, and may be EPROM or EEPROM). Note that the bootstrap
@@ -418,7 +407,7 @@ OS Boot
 
 
 Questions
-=========
+---------
 
   * What is a system call? What is the purpose of a system call?  Give a couple
   of examples of ``libc`` system call.  Finally, give an example of a ``libc``
