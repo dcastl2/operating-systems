@@ -14,46 +14,46 @@ in the later quarter.
 | 08/21         | Introduction              | Linux, SSH, Git, and vim        |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 08/28         | Shell scripting           | OS Structures                   |
+| 08/28         | Shell scripting           | Introduction, Continued         |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 09/04         | Processes                 | Processes/Threads               |
+| 09/04         | OS Structures             | Processes                       |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 09/11         | Threads                   | **Test 1**                      |
+| 09/11         | Processes                 | Interprocess Communication      |
 |  ^prog1       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 09/18         | CPU Scheduling            | CPU Scheduling                  |
+| 09/18         | Interprocess Communication| **Test 1**                      |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 09/25         | Process Synchronization   | Process Synchronization         |
+| 09/25         | Threads/OpenMP            | Threads/OpenMP                  |
 |  ^prog2       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 10/02         | Deadlocks                 | Fall Holiday                    |
+| 10/02         | Process Synchronization   | Fall Holiday                    |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 10/09         | Deadlocks                 | **Test 2**                      |
+| 10/09         | Process Synchronization   | **Test 2**                      |
 |  ^prog3       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 10/16         | Main memory               | Main memory                     |
+| 10/16         | CPU Scheduling            | CPU Scheduling                  |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 10/23         | Virtual memory            | Virtual memory                  |
+| 10/23         | Deadlocks                 | Deadlocks                       |
 |  ^prog4       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 10/30         | Filesystem interface      | Filesystem implementation       |
+| 10/30         | Main Memory               | Main/Virtual Memory             |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 11/06         | Filesystem implementation | **Test 3**                      |
+| 11/06         | Virtual Memory            | **Test 3**                      |
 |  ^prog5       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 11/13         | Mass storage              | Mass storage                    |
+| 11/13         | Filesystem Interface      | Filesystem Interface            |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 11/20         | I/O systems               | Thanksgiving                    |
+| 11/20         | Filesystem Implementation | Thanksgiving                    |
 |  ^prog6       |                           |                                 |
 +---------------+---------------------------+---------------------------------+
-| 11/27         | Protection                | Security                        |
+| 11/27         | I/O Systems               | I/O Systems                     |
 |               |                           |                                 |
 +---------------+---------------------------+---------------------------------+
 | 12/04         |                           |                                 |
