@@ -333,3 +333,229 @@ counting semaphores is to restrict some resource to a finite number of
 processes.
 
 
+Deadlocks
+---------
+
+**Starvation** occurs when one or more processes is denied access to resources
+and cannot proceed with its task.
+
+A **deadlock** occurs when release from a waiting queue can only occur by other
+waiting processes with the same characteristic.  It is the most severe form of
+starvation since all processes are affected.
+
+In the simplest deadlock scenario, suppose P0 calls wait(S) and P1 calls
+wait(Q) at the same time, such that each process must wait for the other to
+signal.  P1 would later invoke signal(S) and P0 would invoke signal(Q), but
+since each process must wait for the other to signal, they become deadlocked.
+
+
+Priority inversion
+------------------
+
+**Priority inversion** occurs when threads execute out of the intended order
+according to priorities placed on them.
+
+Suppose we have low-priority thread L, medium-priority M, and high-priority H,
+which share a resource R.
+
+Suppose L is released and executes immediately. Shortly after it starts, it
+acquires a lock on resource R. Then, thread H is released and preempts thread
+L. Then M is released but doesn't execute because higher-priority thread H is
+still executing. Shortly afterward, thread H attempts to acquire a lock on
+resource R, but cannot since thread L (a lower priority thread) still owns it.
+This allows thread M to execute in place of H, violating priority.
+
+A solution is **priority-inheritance protocol**, in which all processes which
+access resources needed by higher-priority processes inherit higher priority
+until they are finished with the resource.
+
+Suppose in the example above that L had inherited the priority of H when it
+acquired the lock on R.  In this case, it would not be preempted by M due to
+its (temporary) higher priority.  Intuitively this makes sense; processes or
+threads which need resources for which access must be limited should be given
+higher priority, so that they may turn those resources over to other threads
+which require them.
+
+Synchronization Problems
+========================
+
+
+Bounded-Buffer
+--------------
+
+Suppose we have semaphores:
+
+..code:: cpp
+
+  int n;
+  semaphore mutex = 1;
+  semaphore full  = 0;
+  semaphore empty = n;
+
+
+Here, the ``mutex`` semaphore is used for mutual exclusion for access to a
+buffer. ``empty`` and ``full`` count the number of empty and full buffers.
+``n`` is the number of buffers.
+
+
+.. code:: cpp
+
+   do {
+     // produce item
+     wait(empty);
+     wait(mutex);
+     //add next-produced to buffer
+     signal(mutex);
+     signal(full);
+   } while (true);
+
+
+This code reads like so.  "Wait until a buffer is empty. Then wait until I can
+access the buffers.  Add a produced item to the buffer.  Signal that other
+processes can access the buffers now.  Signal that the buffer has been filled
+with an item."
+
+
+.. code:: cpp
+
+   do {
+     // produce item
+     wait(full);
+     wait(mutex);
+     //add next-produced to buffer
+     signal(mutex);
+     signal(empty);
+   } while (true);
+
+
+This code reads like so.  "Wait until a buffer is filled. Then wait until I can
+access the buffers.  Take a produced item from the buffer.  Signal that other
+processes can access the buffers now.  Signal that the buffer has been emptied
+by one item."
+
+
+Readers-Writers
+---------------
+
+Generally, consider a database shared among multiple concurrent processes.
+Some may want to read; others may write (modify or add).  There is no problem
+if multiple processes read the data, but problems arise on multiple concurrent
+writes, or concurrent writes and reads.  It is possible on write/write that two
+processes partially write segments of the data, resulting in false values;
+similarly for write/read, a false value may be read.  We want for these
+combinations of operations to be mutually exclusive.
+
+*First readers-writers problem* requires that no reader should be kept waiting
+unless a writer has a lock on the data.  The *second readers-writers problem*
+requires that once a writer is ready, it should perform its operation as
+quickly as possible. 
+
+A solution to either problem may result in starvation.  In the first case,
+writers may starve. In the second case, readers may starve. These happen
+because of the relative priority of reads and writes; if one happens quickly
+enough, the other is left to wait indefinitely.
+
+Suppose we have the semaphores:
+
+
+.. code:: cpp
+
+   semaphore rw_mutex = 1;
+   semaphore mutex    = 1;
+   int read_count     = 0;
+
+
+``rw_mutex`` is to ensure mutual exclusion of reads and writes. ``read_count``
+is the number of processes which are currently reading. ``mutex`` is to ensure
+mutual exclusion when ``read_count`` is updated.
+
+Then the writer may be as follows:
+
+.. code:: cpp
+
+   do {
+     wait(rw_mutex);
+     // write occurs
+     signal(rw_mutex);
+   } while(true);
+
+
+That is to say, it waits until read/write mutual exclusion is guaranteed, then
+writes and signals for other processes that reading and writing may continue.
+As for the reader:
+
+.. code:: cpp
+
+   do {
+     wait(mutex);
+     read_count++;
+     if (read_count==1)
+       wait(rw_mutex);
+     signal(mutex);
+     //read
+     wait(mutex);
+     read_count--;
+     if (read_count==0)
+       signal(rw_mutex);
+     signal(mutex);
+   } while(true);
+
+
+That is, it allows for writes only if there are no other readers (as per
+``wait(rw_mutex)`` if read_count is newly incremented to 1, and
+``signal(rw_mutex)`` if decremented to 0).  Note that there is no mutual
+exclusion required for the read itself. 
+
+Some systems have a **reader-writer** lock, which has a specific flag
+to indicate whether reading or writing is to be done on a resource.
+
+
+Dining-Philosophers
+-------------------
+
+Five philosophers sit at a table and only think and eat (from a bowl of rice,
+at the center).  When thinking, the philosophers do not interact with each
+other.  Between each philosopher is a single chopstick.  When a philosopher
+becomes hungry, she picks up the left and right chopsticks and eats from the
+bowl of rice until satiated.  A philosopher may pick up only one chopstick at a
+time, and if a neighbor has a chopstick, she must wait until it is released
+(the neighbor is finished eating).
+
+The dining-philosophers problem represents a class of concurrency-control
+problems.  A solution to representing the philosophers' behavior is to
+represent each chopstick with a semaphore:
+
+
+.. code:: cpp
+
+   semaphore chopstick[5];
+
+   do {
+     wait(chopstick[i]);
+     wait(chopstick[(i+1) % 5]);
+     // eat
+     signal(chopstick[i]);
+     signal(chopstick[(i+1) % 5]);
+     // think
+   } while (true);
+
+
+That is, each philosopher waits for the left (``i``) and right (``(i+1)%5``)
+chopsticks.  Once acquired, she eats.  When finished, she lays down the
+chopsticks, then resumes thinking.
+
+A deadlock may arise if all philosophers become hungry at once and proceed to
+pick up their left chopsticks.  Then they will wait indefinitely for the right
+chopstick, thus resulting in deadlock (which is a form of *starvation*).
+
+Solutions:
+
+  * Allow only four philosophers to dine at once.
+  * Pick up the chopsticks only if both available.
+  * Asymmetry; odd-numbered picks up left first. 
+
+
+Monitors
+--------
+
+TBD.
