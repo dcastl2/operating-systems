@@ -61,4 +61,4 @@ in the later quarter.
 +---------------+---------------------------+---------------------------------+
 ^ = due at 6:00 PM that Sunday
 
-Final exam is Tuesday, Dec. 6th, from 3:00-5:00 PM
+Final exam is Friday, Dec. 9th, from 5:30-7:30 PM
