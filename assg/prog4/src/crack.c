@@ -25,15 +25,15 @@ int main() {
   int N=pow(26, 4);
   int M=pow(26, 2);
 
-  int fd  = open("hash.txt", 'r');
+  int fd  = open("hash", 'r');
   int num = read(fd, target, 16);
   if (num) target[num-1] = 0;
   else     exit(0);
   close(fd);
 
-  for (int i=0; i<N; i++)
+  for (int i=0; i<N; i++) {
+    ith(password, i, 4);
     for (int j=0; j<M; j++) {
-      ith(password, i, 4);
       ith(salt,     j, 2);
       hash = crypt(password, salt);
       if (0==strcmp(hash, target)) {
@@ -41,5 +41,6 @@ int main() {
         exit(1);
       } else printf("Trying %s...\r", password);
     }
+  }
 
 }
