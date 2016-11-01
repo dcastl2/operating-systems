@@ -128,4 +128,74 @@ such sequence exists, the system state is said to be **unsafe**.
 Safe states are never deadlocked states; all deadlocked states are unsafe
 states; but not all unsafe states are deadlocked states.  An unsafe state
 may lead to a deadlock.  As long as a state is safe, the OS can avoid unsafe
-statesand thus deadlock.
+states and thus deadlock.
+
+Banker's Algorithm
+==================
+
+Banker's algorithm for judging system safety is for systems with multiple
+resources of a type.  Essentially, the algorithm simulates resource
+acquisition.  Suppose there are *m* types of resources and *n* processes.
+Banker's algorithm requires these data structures:
+
+  * *V* of size *m*, which indicates the number of available resources
+    of each type.
+
+  * *M*, a matrix of size *n x m*, which indicates the maximum demand
+    for the ith process of the jth resource.
+
+  * *A* of size *n x m*, which indicates the number of resources 
+    of a type allocated to a process
+
+  * *N* of size *n x m*, which indicates the need of a process for
+    a resource.  N = M - A.
+
+  * Define *W* of size *m*, which indicates the number currently available
+    (working) resources.  
+
+  * Also define *F*, a boolean vector of size *n* which indicates if
+    a process is finished or not.
+
+Also if X and Y are vectors, X <= Y iff for all i in [1, n], Xi <= Yi.
+The safety algorithm is as follows:
+
+  1. Set *W = A* and *F = 0*.
+
+  2. Find index *i* s.t.:
+
+     a. *Fi  = 0*.
+     b. *Ni <= W*.
+
+     If no such i exists, goto step (4).
+
+  3. Set *W = W + Ai* and *Fi = 1*; then goto step (2).
+
+  4. If *F = 1*, the system is safe; else unsafe.
+
+Intuitively, the algorithm loops, finding the next process which is not
+finished whose needs are less than what is available. If such a process exists,
+add those resources allocated to it to the working available resources, flag
+the process as finished, and repeat.  If no such process exists and if all
+processes are finished, the system is safe; but if there is a process which is
+not finished, the system is unsafe (because then there exists a process with
+unmet needs).
+
+The resource-request algorithm determines if requests can be safely granted.
+For it we require *R*, an *n x m* matrix of requests.  We define the algorithm
+for a process *Pi* as follows:
+
+  1. If *Ri <= Ni*, goto step (2), else raise an error condition (it is
+     requesting more than it needs).
+
+  2. If *Ri <= Ai*, goto step (3). Otherwise *Pi* must wait since the
+     resources are not available.
+
+  3. Modify the state as follows:
+
+     a. *V  = V  - Ri*
+     b. *Ai = Ai + Ri*
+     c. *Ni = Ni - Ri*.
+
+  4. Finally, test safety of this new state with the safety algorithm.
+
+
