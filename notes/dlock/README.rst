@@ -194,9 +194,9 @@ for a process *Pi* as follows:
 
   .. math::
 
-      V  = V  - Ri
-      Ai = Ai + Ri
-      Ni = Ni - Ri
+      V   = V   - R_i
+      A_i = A_i + R_i
+      N_i = N_i - R_i
 
   4. Finally, test safety of this new state with the safety algorithm.
 
