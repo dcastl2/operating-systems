@@ -192,10 +192,11 @@ for a process *Pi* as follows:
 
   3. Modify the state as follows:
 
-     a. *V  = V  - Ri*
-     b. *Ai = Ai + Ri*
-     c. *Ni = Ni - Ri*.
+  .. math::
+
+      V  = V  - Ri
+      Ai = Ai + Ri
+      Ni = Ni - Ri
 
   4. Finally, test safety of this new state with the safety algorithm.
-
 
