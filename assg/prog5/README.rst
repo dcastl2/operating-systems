@@ -3,7 +3,7 @@ Homework 5
 
 Select up to 64 points worth of problems.  You may earn +N extra credit points
 if you submit the assignment N<=8 days in advance of the due date (Sunday at
-6:00:00 PM on 11/06/2016).
+6:00:00 PM on 11/13/2016).
 
 
 1. Unstoppable processes.
