@@ -125,10 +125,49 @@ until all pj have finished.  When pj have finished, pi can obtain its
 resources, complete its task, release its resources and terminate...  if no
 such sequence exists, the system state is said to be **unsafe**.
 
+Example:
+
+.. raw::
+
+          Maximum       Current      Remaining           Total     - 12
+           Needs         Needs         Needs             Available - 3
+
+  p0        10             5             5                 
+  p1         4             2             2
+  p2         9             2             7
+
+
+Here the sequence <p1, p0, p2> works.  Availability starts at 3, then becomes
+<5, 10, 12>.  
+
+ * p1's remaining needs (2) can be satisfied by available resources (3).
+ * p0's remaining needs (5) can be satisfied by available resources (3)
+   plus those held by the earlier process p1 (2).
+ * p2's remaining needs (7) can be satisfied by available resources (3)
+   plus those held by p1 (2) and p0 (5).
+
+But consider this situation:
+
+
+.. raw::
+
+          Maximum       Current      Remaining           Total     - 12
+           Needs         Needs         Needs             Available - 2
+
+  p0        10             5             5                 
+  p1         4             2             2
+  p2         9             3             6
+
+Here p1 could request 2, then return them to push availability up to 4.  But no
+other process has remaining needs less than 4; so this state is an unsafe
+state.  By the time p1 has satisfied its request, the state will become
+deadlocked.
+
 Safe states are never deadlocked states; all deadlocked states are unsafe
 states; but not all unsafe states are deadlocked states.  An unsafe state
 may lead to a deadlock.  As long as a state is safe, the OS can avoid unsafe
 states and thus deadlock.
+
 
 Banker's Algorithm
 ==================
@@ -180,6 +219,27 @@ processes are finished, the system is safe; but if there is a process which is
 not finished, the system is unsafe (because then there exists a process with
 unmet needs).
 
+.. raw::
+
+     Allocation     Max       Available      Need       Finish
+
+      r1 r2 r3    r1 r2 r3    r1 r2 r3     r1 r2 r3       
+  p0  0  1  0     7  5  3     3  3  2      7  4  3        0
+  p1  2  0  0     3  2  2                  1  2  2        0
+  p2  3  0  2     9  0  2                  6  0  0        0
+  p3  2  1  1     2  2  2                  0  1  1        0
+  p4  0  0  2     4  3  3                  4  3  1        0
+
+
+A possible sequence of steps is as follows:
+
+  *  Select i=3 since <0,1,1> <= <3,2,2>.  Then add <2,1,1> to get <5,4,3>.
+  *  Select i=1 since <1,2,2> <= <5,4,3>.  Then add <2,0,0> to get <7,4,3>.
+  *  Select i=0 since <7,4,3> <= <7,4,3>.  Then add <0,1,0> to get <7,5,3>.
+  *  Select i=2 since <6,0,0> <= <7,5,3>.  Then add <3,0,2> to get <10,5,5>.
+  *  Select i=4 since <4,3,1> <= <10,5,5>. Then add <0,0,2> to get <10,5,7>.
+
+
 The resource-request algorithm determines if requests can be safely granted.
 For it we require *R*, an *n x m* matrix of requests.  We define the algorithm
 for a process *Pi* as follows:
@@ -192,11 +252,144 @@ for a process *Pi* as follows:
 
   3. Modify the state as follows:
 
-  .. math::
-
-      V   = V   - R_i
-      A_i = A_i + R_i
-      N_i = N_i - R_i
+     a. *V  = V  - Ri*
+     b. *Ai = Ai + Ri*
+     c. *Ni = Ni - Ri*
 
   4. Finally, test safety of this new state with the safety algorithm.
+
+
+Suppose R1 = <1,0,2>.  To decide if it can be immediately granted, we
+add it to A1, deduct from W, and run the algorithm again:
+
+.. raw::
+
+     Allocation     Max       Available      Need       Finish
+
+      r1 r2 r3    r1 r2 r3    r1 r2 r3     r1 r2 r3       
+  p0  0  1  0     7  5  3     2  3  0      7  4  3        0
+  p1  3  0  2     3  2  2                  0  2  0        0
+  p2  3  0  2     9  0  2                  6  0  0        0
+  p3  2  1  1     2  2  2                  0  1  1        0
+  p4  0  0  2     4  3  3                  4  3  1        0
+
+
+We could try sequence 1, 3, 4, 0, 2.  Note that requests R4 = <3,3,0> could not
+be granted nor could R0 = <0,2,0>.
+
+
+
+Deadlock Detection
+==================
+
+In a case in which each resource type has a single instance, we can construct a
+**wait-for** graph by collapsing edges of a resource-allocation graph such that
+only processes appear.  To detect deadlocks, an algorithm must maintain such a
+graph and detect cycles in it.
+
+If resource types have multiple instances, the algorithm becomes similar to
+the banker's algorithm. We require  **V**, **A**, and **R**, as before.
+
+  1. Let *W = V*.  Let *Fi = 1* if *Ai > 0*.
+
+  2. Find index *i* s.t.
+
+     a. Fi  = 0
+     b. Ri <= W
+
+     If no such *i* exists, then goto step (4).
+
+  3. Let *W = W + Ai* and *Fi = 1*, then goto (2).
+
+  4. If *Fi = 0* for some *i*, then the system is in a deadlocked state.
+     In particular *Pi* is deadlocked.
+
+.. raw::
+
+     Allocation   Request     Available        Finish
+
+      r1 r2 r3    r1 r2 r3    r1 r2 r3           
+  p0  0  1  0     0  0  0     0  0  0            0
+  p1  2  0  2     2  0  2                        0
+  p2  3  0  2     0  0  0                        0
+  p3  2  1  1     1  0  0                        0
+  p4  0  0  2     0  0  2                        0
+
+
+The seqeunce 0, 2, 3, 1, 4 satisfies.  But suppose that the request matrix
+is modified such that P2 requests an additional instance of type r2. Then:
+
+.. raw::
+
+     Allocation   Request     Available        Finish
+
+      r1 r2 r3    r1 r2 r3    r1 r2 r3           
+  p0  0  1  0     0  0  0     0  0  0            0
+  p1  2  0  2     2  0  2                        0
+  p2  3  0  2     0  0  0                        0
+  p3  2  1  1     1  0  0                        0
+  p4  0  0  2     0  0  2                        0
+
+The system is now deadlocked. We can go only as far as i=0, but then
+no process requests less than the available amount.
+
+
+Deadlock Recovery
+=================
+
+We can terminate processes in one of two ways:
+
+  * Abort all deadlocked processes. This has a high cost.
+
+  * Abort one process at a time until the deadlock cycle is eliminated.
+    Possibly lower overall cost, but the detection algorithm must be
+    invoked for each aborted process.
+
+Aborting a process can have dire consequences, particularly if the
+process is in the middle of editing a shared resource.  If we use
+the latter method to kill off processes, then we wish to incur the
+minimum cost of doing so, which may be defined by:
+
+  * priority
+  * execution time
+  * resources
+  * needs
+  * children
+  * interactivity
+
+We could also use resouce preemption, however under consideration:
+
+  * Victim selection.  Which resource and process is to be preempted?
+    Could run into the same hazards as with process termination. Use
+    cost calculation.
+
+  * Rollback.  What should be done with the process once it is preempted?
+    Simplest solution is aborting process.
+
+  * Starvation.  Given that victim selection may be based on a cost factor, a
+    process may be singled out.  How can we make sure that processes do not
+    "bully" that process, i.e. constantly preempt its resources?  Could include
+    number of rollbacks in the cost factor.
+
+
+.. raw::
+
+ ______  __  __   ______       ______   __   __   _____    
+/\__  _\/\ \_\ \ /\  ___\     /\  ___\ /\ "-.\ \ /\  __ \  
+\/_/\ \/\ \  __ \\ \  __\     \ \  __\ \ \ \-.  \\ \ \/\ \ 
+   \ \_\ \ \_\ \_\\ \_____\    \ \_____\\ \_\\"\_\\ \____/ 
+    \/_/  \/_/\/_/ \/_____/     \/_____/ \/_/ \/_/ \/____/ 
+
+
+.. raw::
+
+     Allocation     Max       Available      Need       Finish
+
+      r1 r2 r3    r1 r2 r3    r1 r2 r3     r1 r2 r3       
+  p0  0  1  2     1  2  3     1  1  1      1  1  1        0
+  p1  1  0  1     3  2  1                  2  2  0        0
+  p2  1  0  0     1  2  1                  0  2  1        0
+  p3  0  1  0     3  2  3                  3  1  3        0
+
+
 
