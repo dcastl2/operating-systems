@@ -381,15 +381,3 @@ We could also use resouce preemption, however under consideration:
     \/_/  \/_/\/_/ \/_____/     \/_____/ \/_/ \/_/ \/____/ 
 
 
-.. raw::
-
-     Allocation     Max       Available      Need       Finish
-
-      r1 r2 r3    r1 r2 r3    r1 r2 r3     r1 r2 r3       
-  p0  0  1  2     1  2  3     1  1  1      1  1  1        0
-  p1  1  0  1     3  2  1                  2  2  0        0
-  p2  1  0  0     1  2  1                  0  2  1        0
-  p3  0  1  0     3  2  3                  3  1  3        0
-
-
-
