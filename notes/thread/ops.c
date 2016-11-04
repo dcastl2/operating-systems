@@ -6,7 +6,7 @@
 // Calculate a product
 void *product(void *input) {
   int i, p=1; 
-  int *array = input;
+  unsigned long *array = input;
   for (i=array[0]; i<=array[1]; i++)
     p *= i;
   array[2] = p;
@@ -15,7 +15,7 @@ void *product(void *input) {
 // Calculate a sum
 void *sum(void *input) {
   int i, s=0; 
-  int *array = input;
+  unsigned long *array = input;
   array = (int *) array;
   for (i=array[0]; i<=array[1]; i++)
     s += i;
