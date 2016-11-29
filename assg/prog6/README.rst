@@ -51,7 +51,9 @@ if you submit the assignment N<=8 days in advance of the due date (Sunday at
      the difference when the shell spawns) using the ``system`` function when
      it is entered to ``meow``.  Place the hex code into an exploit file called
      ``exploit.txt``.  If successful, your exploit string will give you a
-     shell.
+     shell.  You may find this resource interesting: 
+     
+       http://insecure.org/stf/smashstack.html
 
 
 3. Implementing ``malloc``.
