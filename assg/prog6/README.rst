@@ -5,6 +5,7 @@ Select up to 64 points worth of problems.  You may earn +N extra credit points
 if you submit the assignment N<=8 days in advance of the due date (Sunday at
 6:00:00 PM on 11/27/2016).
 
+
 0. Virtual address space translation.
      [32] Write a program which accepts either one or two command-line
      arguments, and outputs different quantities depending on the number
@@ -23,7 +24,7 @@ if you submit the assignment N<=8 days in advance of the due date (Sunday at
      this ``virtual.c``.
 
 
-2. Rust, the up-and-coming systems programming language.
+1. Rust, the up-and-coming systems programming language.
      [32] Write a program in Rust which accepts via stdin any number of shell
      commands, line-delimited, until the user enters ``quit``.  It should then
      create an equal number of threads, each of which shall run a command from
