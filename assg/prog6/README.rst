@@ -20,8 +20,8 @@ if you submit the assignment N<=8 days in advance of the due date (Sunday at
 
      These are command-line arguments; hence they should be accepted when
      invoking the program program (look in ``argv`` for them).  Input hex
-     addresses are formatted with a leading ``0x`` like so: ``0x42D2``. Call
-     this ``virtual.c``.
+     addresses are formatted with a leading ``0x`` like so: ``0x42D2``. Assume
+     the page size is 4K.  Call this ``virtual.c``.
 
 
 1. Rust, the up-and-coming systems programming language.
